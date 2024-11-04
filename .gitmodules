@@ -1,0 +1,3 @@
+[submodule ".ssh/python-docker-dev-example"]
+	path = .ssh/python-docker-dev-example
+	url = https://github.com/sourgums/repo_shore.git

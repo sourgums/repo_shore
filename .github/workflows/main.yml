@@ -25,8 +25,8 @@ jobs:
         with:
           platforms: linux/amd64,linux/arm64
           push: true
-          tags:  username: avery519314
-         password: avery519314/app:latest
+          tags:  avery519314/app:latest
+          
 
 
         

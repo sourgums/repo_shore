@@ -1,4 +1,4 @@
-name: <name of your build>
+name: python-docker-example
 on:
   push:
     branches: [ main ]
@@ -7,7 +7,7 @@ jobs:
     name: Build and Push to GCP
     runs-on: ubuntu-latest
     env:
-      IMAGE_NAME: <iname-name>
+      IMAGE_NAME: python-docker-dev-example
       PROJECT_ID: gcp-demo-project-413710
     steps:
     - name: Checkout
@@ -20,7 +20,7 @@ jobs:
         export_default_credentials: true
 
     - name: Build Docker Image
-      run: docker build -t $IMAGE_NAME:latest .
+      run: docker build -t python-docker-dev-example:latest .
 
     - name: Configure Docker Client
       run: |-
@@ -31,8 +31,8 @@ jobs:
       env:
         GIT_TAG: v1
       run: |-
-        docker tag $IMAGE_NAME:latest gcr.io/${{ env.PROJECT_ID }}/$IMAGE_NAME:latest
-        docker tag $IMAGE_NAME:latest gcr.io/${{ env.PROJECT_ID }}/$IMAGE_NAME:$GIT_TAG
+        docker tag $IMAGE_NAME:latest gcr.io/${{ env.PROJECT_ID }}/python-docker-dev-example:latest
+        docker tag $IMAGE_NAME:latest gcr.io/${{ env.PROJECT_ID }}/python-docker-dev-example:$GIT_TAG
         docker push gcr.io/${{ env.PROJECT_ID }}/$IMAGE_NAME:latest
         docker push gcr.io/${{ env.PROJECT_ID }}/$IMAGE_NAME:$GIT_TAG
 
@@ -40,6 +40,6 @@ jobs:
       env:
         GIT_TAG: v1
       run: |-
-        docker tag $IMAGE_NAME:$GIT_TAG us-central1-docker.pkg.dev/${{ env.PROJECT_ID }}/images/$IMAGE_NAME:$GIT_TAG
-        docker push us-central1-docker.pkg.dev/${{ env.PROJECT_ID }}/images/$IMAGE_NAME:$GIT_TAG
+        docker tag $IMAGE_NAME:$GIT_TAG us-central1-docker.pkg.dev/${{ env.PROJECT_ID }}/images/python-docker-dev-example:$GIT_TAG
+        docker push us-central1-docker.pkg.dev/${{ env.PROJECT_ID }}/images/python-docker-dev-example:$GIT_TAG
 
